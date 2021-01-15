@@ -1,4 +1,4 @@
-FROM alpine:latest
+FROM alpine:3.13
 
 RUN  apk update \                                                                                                                                                                                                                        
   && apk add wget build-base libxml2-dev bison \                                                                                                                                                                                                      
