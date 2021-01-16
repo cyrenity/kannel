@@ -1,4 +1,4 @@
-FROM alpine:latest
+FROM amd64/alpine:latest
 
 RUN  apk update \                                                                                                                                                                                                                        
   && apk add wget build-base libxml2-dev bison pcre-dev\                                                                                                                                                                                                      
