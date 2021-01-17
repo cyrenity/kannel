@@ -32,6 +32,7 @@ docker run --rm -it --name smsbox \
 ```
 
 ## Kubernetes ##
-Check example deployment files for kubernetes in k8s directory
+Check example deployment files for kubernetes in [k8s](k8s) directory
+
 ## Notes ##
 For your smsbox to be able to connect with the bearerbox, you first need to start the bearerbox. 
