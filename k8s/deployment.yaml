@@ -35,7 +35,7 @@ spec:
             claimName: pvc-smsbox-logs
       containers:
         - name: bearerbox
-          image: cyrenity/docker-kannel-alpine
+          image: cyrenity/kannel:1.4.5-alpine
           command:
             - /usr/sbin/bearerbox
             - '-v'
@@ -57,7 +57,7 @@ spec:
               mountPath: /var/spool/kannel
               subPath: ''
         - name: smsbox
-          image: cyrenity/docker-kannel-alpine
+          image: cyrenity/kannel:1.4.5-alpine
           command:
             - /usr/sbin/smsbox
             - '-v'
