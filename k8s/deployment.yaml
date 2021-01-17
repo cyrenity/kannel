@@ -1,0 +1,78 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kannelgw
+  labels:
+    app: kannelgw
+spec:
+  selector:
+    matchLabels:
+      octopusexport: OctopusExport
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: kannelgw
+        octopusexport: OctopusExport
+    spec:
+      volumes:
+        - name: kannel-config
+          configMap:
+            name: kannel-config
+            items:
+              - key: config
+                path: kannel.conf
+        - name: kannel-logs
+          persistentVolumeClaim:
+            claimName: pvc-kannel-logs
+        - name: kannel-spool
+          persistentVolumeClaim:
+            claimName: pvc-kannel-spool
+        - name: smsbox-logs
+          persistentVolumeClaim:
+            claimName: pvc-smsbox-logs
+      containers:
+        - name: bearerbox
+          image: cyrenity/docker-kannel-alpine
+          command:
+            - /usr/sbin/bearerbox
+            - '-v'
+            - '2'
+            - /etc/kannel/kannel.conf
+          ports:
+            - name: admin-port
+              containerPort: 13000
+            - name: bearerbox-port
+              containerPort: 13001
+          volumeMounts:
+            - name: kannel-config
+              mountPath: /etc/kannel
+              subPath: ''
+            - name: kannel-logs
+              mountPath: /var/log/kannel
+              subPath: ''
+            - name: kannel-spool
+              mountPath: /var/spool/kannel
+              subPath: ''
+        - name: smsbox
+          image: cyrenity/docker-kannel-alpine
+          command:
+            - /usr/sbin/smsbox
+            - '-v'
+            - '2'
+            - /etc/kannel/kannel.conf
+          ports:
+            - name: smsbox-port
+              containerPort: 13013
+          volumeMounts:
+            - name: kannel-config
+              mountPath: /etc/kannel
+              subPath: ''
+            - name: smsbox-logs
+              mountPath: /var/log/kannel
+              subPath: ''
+
+
+

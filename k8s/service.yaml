@@ -1,0 +1,20 @@
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: kannelgw-service
+  labels:
+      app: kannelgw
+spec:
+  selector:
+    app: kannelgw
+  ports:
+  - name: admin-port
+    protocol: TCP
+    port: 13000
+    targetPort: 13000
+  - name: smsbox-port
+    protocol: TCP
+    port: 13013
+    targetPort: 13013
+  type: LoadBalancer

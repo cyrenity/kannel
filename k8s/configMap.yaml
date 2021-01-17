@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: kannel-config
+  labels:
+    name: kannel-config
+  namespace: default
+data:
+  config: |
+    group = core
+    admin-port = 13000
+    smsbox-port = 13001
+    admin-password = ikram
+
+    group = smsc
+    smsc = fake 
+    smsc-id = FAKE
+    port = 10000  
+
+    group = smsbox
+    bearerbox-host = bearerbox
+    sendsms-port = 13013      
+    bearerbox-port = 13001

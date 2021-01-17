@@ -1,0 +1,80 @@
+---
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: kannel-logs-pv
+  labels:
+    type: local
+    app: kannelgw
+spec:
+  storageClassName: standard
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/opt/kannel-logs"
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: kubernetes.io/hostname
+          operator: In
+          values:
+          - k8s-master.bitvizor.com
+          - k8s-node1.bitvizor.com
+          - k8s-node2.bitvizor.com
+          
+---
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: smsbox-logs-pv
+  labels:
+    type: local
+    app: kannelgw
+spec:
+  storageClassName: standard
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/opt/smsbox-logs"
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: kubernetes.io/hostname
+          operator: In
+          values:
+          - k8s-master.bitvizor.com
+          - k8s-node1.bitvizor.com
+          - k8s-node2.bitvizor.com
+          
+---
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: kannel-spool-pv
+  labels:
+    type: local
+    app: kannelgw
+spec:
+  storageClassName: standard
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/opt/kannel-spool"
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: kubernetes.io/hostname
+          operator: In
+          values:
+          - k8s-master.bitvizor.com
+          - k8s-node1.bitvizor.com
+          - k8s-node2.bitvizor.com
