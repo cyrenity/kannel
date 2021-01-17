@@ -1,7 +1,7 @@
-docker-kannel-alpine
+Kannel - Opensource SMS and WAP Gateway
 =============
 
-Docker image for [Kannel SMS Gateway](http://kannel.org/)
+Docker image for [Kannel SMS Gateway](http://kannel.org/) -- Based on Alpine Linux
 
 # Usage #
 
@@ -30,5 +30,8 @@ docker run --rm -it --name smsbox \
                     kannel/gateway:1.4.5 \
                     smsbox -v 1 /etc/kannel.conf  
 ```
+
+## Kubernetes ##
+Check example deployment files for kubernetes in k8s directory
 ## Notes ##
 For your smsbox to be able to connect with the bearerbox, you first need to start the bearerbox. 
