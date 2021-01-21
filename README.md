@@ -17,7 +17,7 @@ docker run --rm -it --name bearerbox \
                     --network kannelnet \
                     -p 13000:13000 -p 13001:13001 \
                     --volume /opt/conf:/etc \
-                    kannel/gateway:1.4.5 \
+                    cyrenity/kannel:1.4.5-alpine \
                     bearerbox -v 1 /etc/kannel.conf
 ```
 ### Run the smsbox ###
@@ -27,7 +27,7 @@ docker run --rm -it --name smsbox \
                     --network kannelnet \
                     -p 13013:13013 \
                     --volumes-from bearerbox \
-                    kannel/gateway:1.4.5 \
+                    cyrenity/kannel:1.4.5-alpine \
                     smsbox -v 1 /etc/kannel.conf  
 ```
 
