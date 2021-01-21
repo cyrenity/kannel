@@ -1,7 +1,7 @@
 FROM amd64/alpine:3.12
 
-RUN  apk update \                                                                                                                                                                                                                        
-  && apk add wget build-base libxml2-dev bison pcre-dev ca-certificates openssl-dev \                                                                                                                                                                                                      
+RUN  apk update \                             
+  && apk add wget build-base libxml2-dev bison pcre-dev ca-certificates openssl-dev \                                                                                                                       
   && wget --no-check-certificate https://kannel.org/download/1.4.5/gateway-1.4.5.tar.gz \
   && tar xzf gateway-1.4.5.tar.gz \
   && wget --no-check-certificate https://redmine.kannel.org/attachments/download/327/gateway-1.4.5.patch.gz \
@@ -9,7 +9,7 @@ RUN  apk update \
   && echo "#include <poll.h>" > /usr/include/sys/poll.h \
   && cd gateway-1.4.5 \
   && gunzip -c ../gateway-1.4.5.patch.gz | patch -p1 \
-  && ./configure --prefix=/usr --sysconfdir=/etc/kannel  --disable-wap --enable-pcre --with-ssl  \
+  && ./configure --prefix=/usr --sysconfdir=/etc/kannel  --disable-wap --enable-pcre --enable-ssl  \
   && touch .depend \
   && make \
   && make install \
